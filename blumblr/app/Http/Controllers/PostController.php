@@ -14,8 +14,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = \App\Post::all();
-        // dd($posts);
+        $posts = \App\Post::where('user_id', \Auth::id())->get();
         return view('posts.index', compact('posts'));
     }
 

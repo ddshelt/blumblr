@@ -14,9 +14,9 @@ class PostsTableSeeder extends Seeder
     {
 
       //select from model where record is...
-      $janine = \App\User::where('name', 'Janine')->first();
-      $derrick = \App\User::where('name', 'Derrick')->first();
-      $dejah = \App\User::where('name', 'Dejah')->first();
+      // $janine = \App\User::where('name', 'Janine')->first();
+      // $derrick = \App\User::where('name', 'Derrick')->first();
+      // $dejah = \App\User::where('name', 'Dejah')->first();
 
       $users = [ $janine, $derrick, $dejah];
 
@@ -24,7 +24,7 @@ class PostsTableSeeder extends Seeder
         //DB facade way
         foreach ($users as $user) {
           DB::table('posts')->insert([
-            'title' => '-I Had A Great Day',
+            'title' => 'I Had A Great Day',
             'user_id' => $user->id,
             // 'name' => $user->id,
             'post' => '',
