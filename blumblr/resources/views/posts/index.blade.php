@@ -1,6 +1,11 @@
 @extends ('layouts.app')
 
+
+
 @section('content')
+<p class="text-center"><a href="/posts/create">Create a new Post</a></p>
+
+
   @foreach($posts as $post)
   <div class="container d-flex justify-content-center mt-5">
     <div class="card text-center" style="width: 18rem;">
