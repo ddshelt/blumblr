@@ -26,6 +26,8 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
+
     }
 
     /**
@@ -37,6 +39,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $post = new \App\Post;
+        // $post->name = 'Derrick';
+        $post->title = $request->input('postname');
+        $post->user_id = $request->input('postid');
+        $post->post = $request->input('postpost');
+        $post->save();
+
+        $request->session()->flash('status', "A new post called {$post->title} was added.");
+        return redirect('/posts');
+        // dd($request);
     }
 
     /**
@@ -59,6 +71,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post = \App\Post::find($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -71,6 +85,14 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = \App\Post::find($id);
+        $post->title = $request->input('postname');
+        $post->user_id = $request->input('postid');
+        $post->post = $request->input('postpost');
+        $post->save();
+
+        $request->session()->flash('status', "This post is now called <strong>{$post->title}</strong> .");
+        return redirect('/posts');
     }
 
     /**
@@ -79,8 +101,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        $post = \App\Post::find($id);
+        $post->delete();
+
+        $request->session()->flash('status', "This post called <strong>{$post->title}</strong> was deleted .");
+        return redirect('/posts');
     }
+
+    public function confirmDelete($id){
+      $post = \App\Post::find($id);
+      return view('posts.confirmDelete', compact('post'));
+    }
+
 }

@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             //unique title
             $table->string('title', 250);
-            $table->string('post', 500);
+            $table->String('post', 500);
             //set up user id as foreign key
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
